@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "c57cbafa94764317d6b9",
   "position": {
-    "x": 92.5,
-    "y": 166.25,
-    "z": 0,
-    "height": 256.25,
-    "width": 282.5,
+    "x": 245.71428571428572,
+    "y": 147.14285714285714,
+    "z": 1000,
+    "height": 255.71428571428572,
+    "width": 327.14285714285717,
     "tabOrder": 0
   },
   "visual": {
@@ -52,5 +52,37 @@
       }
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "477d6cb3921070238a4d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measure_table"
+              }
+            },
+            "Property": "Revenue"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "79d0653759a0c7e55463",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "calendar"
+              }
+            },
+            "Property": "Year"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

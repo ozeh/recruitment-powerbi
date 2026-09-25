@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
-  "name": "2f382371d10b09e06ddc",
+  "name": "4a82010b5210854d214d",
   "position": {
-    "x": 1584.2857142857144,
-    "y": 145.71428571428572,
-    "z": 7000,
-    "height": 255.71428571428572,
-    "width": 327.14285714285717,
-    "tabOrder": 4000
+    "x": 245,
+    "y": 801.66666666666674,
+    "z": 10001,
+    "height": 255,
+    "width": 498.33333333333337,
+    "tabOrder": 8001
   },
   "visual": {
     "visualType": "kpi",
@@ -23,11 +23,11 @@
                       "Entity": "measure_table"
                     }
                   },
-                  "Property": "Revenue PLN"
+                  "Property": "Total Sales All"
                 }
               },
-              "queryRef": "measure_table.Revenue PLN",
-              "nativeQueryRef": "Revenue PLN"
+              "queryRef": "measure_table.Total Sales All",
+              "nativeQueryRef": "Total Sales All"
             }
           ]
         },
@@ -51,12 +51,27 @@
         }
       }
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Total Sales All - ignoring context'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
       {
-        "name": "738621bac143000ebd0b",
+        "name": "2ed1607e28a4b01d94b0",
         "field": {
           "Measure": {
             "Expression": {
@@ -64,13 +79,13 @@
                 "Entity": "measure_table"
               }
             },
-            "Property": "Revenue PLN"
+            "Property": "Total Sales All"
           }
         },
         "type": "Advanced"
       },
       {
-        "name": "b28d5fd489a58da99724",
+        "name": "366212a90e749c867e93",
         "field": {
           "Column": {
             "Expression": {

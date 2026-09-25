@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "9e17046480251a002db1",
   "position": {
-    "x": 385,
-    "y": 166.25,
-    "z": 1000,
-    "height": 256.25,
-    "width": 282.5,
+    "x": 581.42857142857144,
+    "y": 147.14285714285714,
+    "z": 2000,
+    "height": 255.71428571428572,
+    "width": 322.85714285714289,
     "tabOrder": 1000
   },
   "visual": {
@@ -52,5 +52,37 @@
       }
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "085f4aa84d2314144a71",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measure_table"
+              }
+            },
+            "Property": "Margin"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f9e02161a7845a9243d3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "calendar"
+              }
+            },
+            "Property": "Year"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

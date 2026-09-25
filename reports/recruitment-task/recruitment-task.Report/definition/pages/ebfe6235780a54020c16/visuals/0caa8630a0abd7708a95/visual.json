@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "0caa8630a0abd7708a95",
   "position": {
-    "x": 14.589665653495441,
-    "y": 126.93009118541033,
-    "z": 4000,
-    "height": 749.90881458966567,
-    "width": 1873.3130699088147,
+    "x": 244.28571428571431,
+    "y": 147.14285714285714,
+    "z": 5000,
+    "height": 744.28571428571433,
+    "width": 1614.2857142857144,
     "tabOrder": 4000
   },
   "visual": {
@@ -88,6 +88,52 @@
       }
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "3af2041ba9abd084e373",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "calendar"
+              }
+            },
+            "Property": "Year Month"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7299e58a9050d8580a17",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_product"
+              }
+            },
+            "Property": "Category"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a06e2e2b1578bbb21951",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measure_table"
+              }
+            },
+            "Property": "Revenue"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   },
   "isHidden": true
 }

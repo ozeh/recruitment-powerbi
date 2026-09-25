@@ -42,58 +42,6 @@ table measure_table
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Customer Sales for Pie' =
-			
-			VAR TopCustomers =
-			    TOPN(
-			        5,
-			        ALLSELECTED(dim_product[Category]),
-			        [Revenue],
-			        DESC
-			    )
-			
-			VAR CurrentCustomer =
-			    SELECTEDVALUE('Customer Group'[Product Category])
-			
-			VAR TopCustomerSales =
-			    CALCULATE(
-			        [Revenue],
-			        TREATAS(
-			            { CurrentCustomer },
-			            dim_product[Category]
-			        )
-			    )
-			
-			VAR OtherSales =
-			    CALCULATE(
-			        [Revenue],
-			        EXCEPT(
-			            ALLSELECTED(dim_product[Category]),
-			            SELECTCOLUMNS(
-			                TopCustomers,
-			                "Customer Name", dim_product[Category]
-			            )
-			        )
-			    )
-			
-			RETURN
-			    IF(
-			        CurrentCustomer = "Others",
-			        OtherSales,
-			        IF(
-			            CONTAINS(
-			                TopCustomers,
-			                dim_product[Category],
-			                CurrentCustomer
-			            ),
-			            TopCustomerSales,
-			            BLANK()
-			        )
-			    )
-		lineageTag: b0a42592-488f-4013-b9aa-bdac6460d2c8
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	measure 'Revenue YOY%' = ([Revenue] - [Revenue PY]) / [Revenue]
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 7ecb181f-82ad-4baf-a5bf-4d9fe90a9ac2
@@ -131,6 +79,16 @@ table measure_table
 			    MaxValue, 2,
 			    0)
 		lineageTag: df3a8615-166f-44ac-aba1-e865c493500d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales All' =
+			
+			calculate(
+			    [Revenue],
+			    REMOVEFILTERS('calendar')
+			)
+		lineageTag: ab204d36-6963-44eb-bb3a-b85f9d8872e4
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 

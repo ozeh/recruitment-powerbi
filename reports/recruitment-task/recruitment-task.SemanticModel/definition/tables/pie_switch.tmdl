@@ -1,0 +1,52 @@
+table pie_switch
+	lineageTag: 42ad7aff-7631-4cb2-877d-0427a9e93e12
+
+	column pie_switch
+		lineageTag: 0afa9096-a037-4f94-8d4f-f8d14472484c
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'pie_switch Order'
+
+		relatedColumnDetails
+			groupByColumn: 'pie_switch Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'pie_switch Fields'
+		isHidden
+		lineageTag: 5edc6302-8c09-440d-bf48-7c455d0314c9
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'pie_switch Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'pie_switch Order'
+		isHidden
+		formatString: 0
+		lineageTag: c23a0983-87b7-4323-8812-6ac9dc92c8e5
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition pie_switch = calculated
+		mode: import
+		source =
+				{
+				    ("Margin", NAMEOF('measure_table'[Margin]), 0),
+				    ("Profit", NAMEOF('measure_table'[Profit]), 1),
+				    ("Revenue", NAMEOF('measure_table'[Revenue]), 2),
+				    ("Revenue PLN", NAMEOF('measure_table'[Revenue PLN]), 3),
+				    ("Sales Volume", NAMEOF('measure_table'[Sales Volume]), 4),
+				    ("Total Cost", NAMEOF('measure_table'[Total Cost]), 5)
+				}
+
+	annotation PBI_Id = 01e8135c65b64e5292f6f5364742c4b0
+

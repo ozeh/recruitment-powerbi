@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "c4623c5428ba301bd090",
   "position": {
-    "x": 14.589665653495441,
-    "y": 126.93009118541033,
-    "z": 0,
-    "height": 761.580547112462,
-    "width": 1866.0182370820669,
+    "x": 245.71428571428572,
+    "y": 147.14285714285714,
+    "z": 1000,
+    "height": 761.42857142857144,
+    "width": 1611.4285714285716,
     "tabOrder": 0
   },
   "visual": {
@@ -43,7 +43,7 @@
               },
               "queryRef": "calendar.Quarter",
               "nativeQueryRef": "Quarter",
-              "active": true
+              "active": false
             },
             {
               "field": {
@@ -224,6 +224,7 @@
             "queryRefs": [
               "calendar.Year"
             ],
+            "isCollapsed": true,
             "isPinned": true
           },
           {
@@ -341,5 +342,149 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "27360d50394d54303db8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "calendar"
+              }
+            },
+            "Property": "Year"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "44aa8e9730d65506a079",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "calendar"
+              }
+            },
+            "Property": "Quarter"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7b6a996b9e41c26a2298",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "calendar"
+              }
+            },
+            "Property": "Month Name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "26fd9ef27d86e2c62997",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_product"
+              }
+            },
+            "Property": "Category"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "eb868d736e04e730100a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_product"
+              }
+            },
+            "Property": "Sub-Category"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e6c7ca6c21be97937eee",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_product"
+              }
+            },
+            "Property": "Product Name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b992e5b90009c0dcdd1c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measure_table"
+              }
+            },
+            "Property": "Revenue PY"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "43b3a41c4860290e7d10",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measure_table"
+              }
+            },
+            "Property": "Revenue"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "3338009490054a5b2d0a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measure_table"
+              }
+            },
+            "Property": "Revenue YOY%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "be7867d302d02d053949",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "measure_table"
+              }
+            },
+            "Property": "Margin"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

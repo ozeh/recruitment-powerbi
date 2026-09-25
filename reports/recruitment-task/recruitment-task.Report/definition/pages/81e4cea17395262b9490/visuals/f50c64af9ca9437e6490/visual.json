@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "f50c64af9ca9437e6490",
   "position": {
-    "x": 22.5,
-    "y": 123.75,
-    "z": 0,
-    "height": 403.75,
-    "width": 1568.75,
+    "x": 245.71428571428572,
+    "y": 151.42857142857144,
+    "z": 1000,
+    "height": 402.85714285714289,
+    "width": 1611.4285714285716,
     "tabOrder": 0
   },
   "visual": {
@@ -232,7 +232,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "a5178a4b3e6125b8ca0d",
+        "name": "2da257e8970b1dcc470a",
         "field": {
           "Column": {
             "Expression": {
@@ -246,7 +246,7 @@
         "type": "Advanced"
       },
       {
-        "name": "d7e8a697603b79a6b433",
+        "name": "e45acc336c3b820b6d83",
         "field": {
           "Column": {
             "Expression": {
@@ -260,7 +260,7 @@
         "type": "Categorical"
       },
       {
-        "name": "00500d123b7855d39048",
+        "name": "545bb89caca5601a91d1",
         "field": {
           "Column": {
             "Expression": {
@@ -274,7 +274,7 @@
         "type": "Categorical"
       },
       {
-        "name": "02ecc1c0eb6077462d80",
+        "name": "82e6dc440409e8862812",
         "field": {
           "Column": {
             "Expression": {
@@ -288,7 +288,7 @@
         "type": "Categorical"
       },
       {
-        "name": "982a44da4120cb9ec0aa",
+        "name": "d7d6826143083c5824e6",
         "field": {
           "Column": {
             "Expression": {
@@ -302,7 +302,7 @@
         "type": "Categorical"
       },
       {
-        "name": "aab51aa3da156d9e935c",
+        "name": "be8cf1185078241d0e57",
         "field": {
           "Column": {
             "Expression": {
@@ -316,7 +316,7 @@
         "type": "Categorical"
       },
       {
-        "name": "c1cde188db96b0ed76aa",
+        "name": "db87743782cd2b929892",
         "field": {
           "Measure": {
             "Expression": {

@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
-  "name": "f0f547fc9a42d2e8b9b0",
+  "name": "219fb31ca9e97cc7a0cd",
   "position": {
-    "x": 346.80851063829795,
-    "y": 934.95440729483289,
-    "z": 7000,
-    "height": 64.194528875379945,
-    "width": 272.82674772036472,
-    "tabOrder": 5000
+    "x": 231.9756838905775,
+    "y": 0,
+    "z": 8000,
+    "height": 1079.6352583586627,
+    "width": 13.130699088145896,
+    "tabOrder": -1
   },
   "visual": {
     "visualType": "shape",
@@ -18,7 +18,7 @@
             "tileShape": {
               "expr": {
                 "Literal": {
-                  "Value": "'rectangle'"
+                  "Value": "'line'"
                 }
               }
             }
@@ -34,44 +34,18 @@
                   "Value": "0L"
                 }
               }
-            }
-          }
-        }
-      ],
-      "fill": [
-        {
-          "properties": {
-            "fillColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#33CB00'"
-                    }
-                  }
+            },
+            "angle": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ],
       "outline": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "text": [
         {
           "properties": {
             "show": {
@@ -85,24 +59,22 @@
         },
         {
           "properties": {
-            "text": {
+            "weight": {
               "expr": {
                 "Literal": {
-                  "Value": "'Margin >= 10%'"
+                  "Value": "2D"
                 }
               }
             },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "12D"
-                }
-              }
-            },
-            "verticalAlignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'middle'"
+            "lineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": -0.25
+                    }
+                  }
                 }
               }
             }
@@ -111,33 +83,22 @@
             "id": "default"
           }
         }
-      ]
-    },
-    "visualContainerObjects": {
-      "background": [
+      ],
+      "fill": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#33CB00'"
-                    }
-                  }
+                  "Value": "false"
                 }
               }
             }
           }
         }
-      ],
+      ]
+    },
+    "visualContainerObjects": {
       "title": [
         {
           "properties": {
@@ -151,7 +112,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Margin > 20%'"
+                  "Value": "'nav_divider_line'"
                 }
               }
             }

@@ -2,9 +2,9 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "3c5d58d9087484d433dc",
   "position": {
-    "x": 371.25,
-    "y": 16.25,
-    "z": 2000,
+    "x": 666.96428571428692,
+    "y": 17.678571428571427,
+    "z": 3000,
     "height": 82.5,
     "width": 321.25,
     "tabOrder": 2000
@@ -68,23 +68,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "125a8ed9e206e037d404",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_sales"
-              }
-            },
-            "Property": "Region"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

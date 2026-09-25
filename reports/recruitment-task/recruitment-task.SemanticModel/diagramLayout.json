@@ -115,11 +115,12 @@
         {
           "location": {
             "x": 1493.3102510202857,
-            "y": 232.08242172182258
+            "y": 256.08242172182258
           },
-          "nodeIndex": "Customer Group",
+          "nodeIndex": "pie_switch",
+          "nodeLineageTag": "42ad7aff-7631-4cb2-877d-0427a9e93e12",
           "size": {
-            "height": 200,
+            "height": 152,
             "width": 234
           },
           "zIndex": 0

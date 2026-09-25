@@ -27,7 +27,6 @@ ref table LocalDateTable_98d78dbb-bb95-4ad4-9b34-c5d8678bf8fb
 ref table rates
 ref table LocalDateTable_b305a909-f145-4278-bc58-aea0928aaa74
 ref table measure_table
-ref table table_switch
 ref table pie_switch
 
 ref cultureInfo en-US

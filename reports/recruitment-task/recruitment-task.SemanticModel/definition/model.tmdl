@@ -1,0 +1,34 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pl-PL
+	valueFilterBehavior: independent
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop"]
+
+annotation PBI_QueryOrder = ["raw_sample_superstore","dim_customer","dim_product","fact_sales","calendar","rates","RangeStart","RangeEnd","measure_table"]
+
+ref table raw_sample_superstore
+ref table dim_customer
+ref table dim_product
+ref table fact_sales
+ref table calendar
+ref table DateTableTemplate_50f400f9-daa5-4d5c-9e31-c6ee6c1ae853
+ref table LocalDateTable_642d4c7f-06a1-4190-9a35-0a718161e442
+ref table LocalDateTable_9d123330-2127-43d2-9263-2b70d89ba48e
+ref table LocalDateTable_602500fc-a17a-4f60-b65c-2d8a3e991fbf
+ref table LocalDateTable_98d78dbb-bb95-4ad4-9b34-c5d8678bf8fb
+ref table rates
+ref table LocalDateTable_b305a909-f145-4278-bc58-aea0928aaa74
+ref table measure_table
+ref table table_switch
+ref table 'Customer Group'
+
+ref cultureInfo en-US
+

@@ -1,0 +1,106 @@
+table calendar
+	lineageTag: 5b7e262e-455d-49b5-9d3b-78447d32f1a5
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dc3922f4-80e0-4761-9646-0bc57ff25caf
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: b448bf6d-f939-44fe-99d7-06ce5597600e
+			defaultHierarchy: LocalDateTable_642d4c7f-06a1-4190-9a35-0a718161e442.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 42569ab7-ff4a-42f3-b4f5-d3d2e2aabd64
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = User
+
+	column Quarter
+		dataType: string
+		lineageTag: 65fbf4e9-c585-49dd-b27b-87f8a0e395ad
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 93cf14b6-a898-4abb-9914-aa43930f94e2
+		summarizeBy: none
+		sourceColumn: Month Number
+
+		annotation SummarizationSetBy = User
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: 6190c206-96bb-40bd-9600-e7b939118522
+		summarizeBy: none
+		sourceColumn: Month Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: string
+		lineageTag: c27c8192-b25a-4d60-8030-12d12431d6e1
+		summarizeBy: none
+		sourceColumn: Year Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		dataType: int64
+		formatString: 0
+		lineageTag: 92f36713-6c53-479b-8404-f40f93bcf09f
+		summarizeBy: none
+		sourceColumn: Day of Week
+
+		annotation SummarizationSetBy = User
+
+	column 'Day Name'
+		dataType: string
+		lineageTag: bc416003-6ffe-4332-b211-10a2afc4fa9c
+		summarizeBy: none
+		sourceColumn: Day Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition calendar = m
+		mode: import
+		source =
+				let
+				    StartDate = Table.Min(fact_sales, "Order Date")[Order Date],
+				    EndDate = Table.Max(fact_sales, "Order Date")[Order Date],
+				
+				    NumberOfDays = Duration.Days(EndDate - StartDate) + 1,
+				    DateList = List.Dates(StartDate, NumberOfDays, #duration(1, 0, 0, 0)),
+				
+				    TableFromList = Table.FromList(DateList, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    RenamedColumn = Table.RenameColumns(TableFromList, {{"Column1", "Date"}}),
+				    ChangedType = Table.TransformColumnTypes(RenamedColumn, {{"Date", type date}}),
+				
+				    AddYear = Table.AddColumn(ChangedType, "Year", each Date.Year([Date]), Int64.Type),
+				    AddQuarter = Table.AddColumn(AddYear, "Quarter", each "Q" & Text.From(Date.QuarterOfYear([Date])), type text),
+				    AddMonthNum = Table.AddColumn(AddQuarter, "Month Number", each Date.Month([Date]), Int64.Type),
+				    AddMonthName = Table.AddColumn(AddMonthNum, "Month Name", each Text.Start(Date.MonthName([Date]), 3), type text),
+				    AddYearMonth = Table.AddColumn(AddMonthName, "Year Month", each Date.ToText([Date], "yyyy-MM"), type text),
+				    AddDayOfWeek = Table.AddColumn(AddYearMonth, "Day of Week", each Date.DayOfWeek([Date]) + 1, Int64.Type),
+				    AddDayOfWeekName = Table.AddColumn(AddDayOfWeek, "Day Name", each Text.Start(Date.DayOfWeekName([Date]), 3), type text)
+				in
+				    AddDayOfWeekName
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

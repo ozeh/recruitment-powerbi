@@ -1,0 +1,183 @@
+table rates
+	lineageTag: 62669a11-b611-475a-aa9f-f383c4bba953
+
+	refreshPolicy
+		policyType: basic
+		rollingWindowGranularity: year
+		rollingWindowPeriods: 1
+		incrementalGranularity: day
+		incrementalPeriods: 7
+		sourceExpression =
+			let
+			    StartDate = Date.From(RangeStart),
+			    EndDate = Date.From(RangeEnd) - #duration(1, 0, 0, 0),
+			
+			    GetRates = (FromDate as date, ToDate as date) as table =>
+			        let
+			            Source =
+			                Json.Document(
+			                    Web.Contents(
+			                        "https://api.nbp.pl",
+			                        [
+			                            RelativePath =
+			                                "api/exchangerates/rates/a/usd/"
+			                                & Date.ToText(FromDate, "yyyy-MM-dd")
+			                                & "/"
+			                                & Date.ToText(ToDate, "yyyy-MM-dd"),
+			                            Query = [format = "json"]
+			                        ]
+			                    )
+			                ),
+			
+			            Rates = Table.FromRecords(Source[rates]),
+			
+			            Typed =
+			                Table.TransformColumnTypes(
+			                    Rates,
+			                    {
+			                        {"no", type text},
+			                        {"effectiveDate", type date},
+			                        {"mid", type number}
+			                    }
+			                )
+			        in
+			            Typed,
+			
+			    Periods =
+			        List.Generate(
+			            () => StartDate,
+			            each _ <= EndDate,
+			            each Date.AddDays(_, 365),
+			            each [
+			                FromDate = _,
+			                ToDate = List.Min(
+			                    {
+			                        Date.AddDays(_, 364),
+			                        EndDate
+			                    }
+			                )
+			            ]
+			        ),
+			
+			    Data =
+			        List.Transform(
+			            Periods,
+			            each GetRates(
+			                [FromDate],
+			                [ToDate]
+			            )
+			        ),
+			
+			    Result =
+			        Table.Combine(Data)
+			
+			in
+			    Result
+
+	column no
+		dataType: string
+		lineageTag: 3d84bd00-0bf5-46a9-91fa-31a5f778cb69
+		summarizeBy: none
+		sourceColumn: no
+
+		annotation SummarizationSetBy = Automatic
+
+	column effectiveDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 89f43ddb-9799-4748-b4d7-21065817c5a2
+		summarizeBy: none
+		sourceColumn: effectiveDate
+
+		variation Variation
+			isDefault
+			relationship: 5f06cd67-a98c-4795-979a-a24e0c74bba0
+			defaultHierarchy: LocalDateTable_b305a909-f145-4278-bc58-aea0928aaa74.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column mid
+		dataType: double
+		lineageTag: abfc9317-3678-4e79-99e4-c46aed4dca18
+		summarizeBy: none
+		sourceColumn: mid
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition rates = m
+		mode: import
+		source =
+				let
+				    StartDate = Date.From(RangeStart),
+				    EndDate = Date.From(RangeEnd) - #duration(1, 0, 0, 0),
+				
+				    GetRates = (FromDate as date, ToDate as date) as table =>
+				        let
+				            Source =
+				                Json.Document(
+				                    Web.Contents(
+				                        "https://api.nbp.pl",
+				                        [
+				                            RelativePath =
+				                                "api/exchangerates/rates/a/usd/"
+				                                & Date.ToText(FromDate, "yyyy-MM-dd")
+				                                & "/"
+				                                & Date.ToText(ToDate, "yyyy-MM-dd"),
+				                            Query = [format = "json"]
+				                        ]
+				                    )
+				                ),
+				
+				            Rates = Table.FromRecords(Source[rates]),
+				
+				            Typed =
+				                Table.TransformColumnTypes(
+				                    Rates,
+				                    {
+				                        {"no", type text},
+				                        {"effectiveDate", type date},
+				                        {"mid", type number}
+				                    }
+				                )
+				        in
+				            Typed,
+				
+				    Periods =
+				        List.Generate(
+				            () => StartDate,
+				            each _ <= EndDate,
+				            each Date.AddDays(_, 365),
+				            each [
+				                FromDate = _,
+				                ToDate = List.Min(
+				                    {
+				                        Date.AddDays(_, 364),
+				                        EndDate
+				                    }
+				                )
+				            ]
+				        ),
+				
+				    Data =
+				        List.Transform(
+				            Periods,
+				            each GetRates(
+				                [FromDate],
+				                [ToDate]
+				            )
+				        ),
+				
+				    Result =
+				        Table.Combine(Data)
+				
+				in
+				    Result
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

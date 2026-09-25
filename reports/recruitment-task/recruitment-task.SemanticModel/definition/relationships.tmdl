@@ -1,0 +1,41 @@
+relationship AutoDetected_9ee53249-ebab-4b17-bda9-20921136f737
+	fromColumn: fact_sales.'Customer ID'
+	toColumn: dim_customer.'Customer ID'
+
+relationship AutoDetected_bda28091-68ef-4a23-b747-cc929382f2aa
+	fromColumn: fact_sales.'Product ID'
+	toColumn: dim_product.'Product ID'
+
+relationship b448bf6d-f939-44fe-99d7-06ce5597600e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: calendar.Date
+	toColumn: LocalDateTable_642d4c7f-06a1-4190-9a35-0a718161e442.Date
+
+relationship 709a5f41-7cde-49fe-ad94-8cabc265d09c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_sample_superstore.'Order Date'
+	toColumn: LocalDateTable_9d123330-2127-43d2-9263-2b70d89ba48e.Date
+
+relationship 61790f5d-5e92-4ce0-8719-b743af1efe55
+	joinOnDateBehavior: datePartOnly
+	fromColumn: raw_sample_superstore.'Ship Date'
+	toColumn: LocalDateTable_602500fc-a17a-4f60-b65c-2d8a3e991fbf.Date
+
+relationship 94f95ec3-a102-4f7c-9130-f46ad2b07ac7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_sales.'Ship Date'
+	toColumn: LocalDateTable_98d78dbb-bb95-4ad4-9b34-c5d8678bf8fb.Date
+
+relationship 5f06cd67-a98c-4795-979a-a24e0c74bba0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: rates.effectiveDate
+	toColumn: LocalDateTable_b305a909-f145-4278-bc58-aea0928aaa74.Date
+
+relationship bcdfb8ae-7476-b510-724b-a264644b6269
+	fromColumn: fact_sales.'Order Date'
+	toColumn: rates.effectiveDate
+
+relationship 6df21e8e-1e7a-fb4f-1b69-3650f45ca2f1
+	fromColumn: fact_sales.'Order Date'
+	toColumn: calendar.Date
+

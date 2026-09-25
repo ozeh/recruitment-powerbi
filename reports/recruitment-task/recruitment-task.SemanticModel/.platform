@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "recruitment-task"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d0e7ecb5-e90c-443a-b1fd-e104dc85c8c7"
+  }
+}

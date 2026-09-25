@@ -1,0 +1,41 @@
+table dim_customer
+	lineageTag: 7b679a9d-4223-4d94-a4ca-875df953098b
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: 6f78e18b-1029-430f-a7d4-1391c0265fa9
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: 64dc087d-7b2f-45f5-9dad-b4e0db272ecc
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		lineageTag: 3ad4c121-cce2-4d96-9878-2c02c758498a
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_customer = m
+		mode: import
+		source =
+				let
+				    Source = raw_sample_superstore,
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Row ID", "Order ID", "Order Date", "Ship Date", "Ship Mode", "Product ID", "Category", "Sub-Category", "Product Name", "Sales", "Quantity", "Discount", "Profit", "Region", "Postal Code", "State", "City", "Country"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Columns", {"Customer ID"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

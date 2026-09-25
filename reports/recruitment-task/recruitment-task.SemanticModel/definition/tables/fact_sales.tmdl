@@ -1,0 +1,221 @@
+table fact_sales
+	lineageTag: 78b8f020-84ca-429b-abc3-a22ae058e205
+
+	column 'Row ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 77d4a9aa-e9a6-4976-97fc-7a02382578c2
+		summarizeBy: none
+		sourceColumn: Row ID
+
+		annotation SummarizationSetBy = User
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 9324473b-3aad-4e3e-8e45-e69da556e3db
+		summarizeBy: none
+		sourceColumn: Order ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 99fd7cfd-9f93-4fe4-b577-1a21baa9de39
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Ship Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 094c89c6-bb22-477b-b6bc-29dfaea56e1e
+		summarizeBy: none
+		sourceColumn: Ship Date
+
+		variation Variation
+			isDefault
+			relationship: 94f95ec3-a102-4f7c-9130-f46ad2b07ac7
+			defaultHierarchy: LocalDateTable_98d78dbb-bb95-4ad4-9b34-c5d8678bf8fb.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Ship Mode'
+		dataType: string
+		lineageTag: fa3dbaa6-4c2a-4cd3-80b3-cfdd39322897
+		summarizeBy: none
+		sourceColumn: Ship Mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer ID'
+		dataType: string
+		lineageTag: ceda1e98-d131-43df-b1dc-b54172b7117e
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: da6a79a1-d9af-4be5-9a3e-669b8aa52f0a
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 27c5be10-9a49-44aa-b1a3-017c6d5fb751
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 070cf107-e1d6-4b1e-a500-25c7ea573f58
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Postal Code'
+		dataType: string
+		lineageTag: 4d8f518f-4b70-471b-976e-b7a0d3ef141e
+		summarizeBy: none
+		sourceColumn: Postal Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: b9f5787d-0280-4f53-beff-ee95374c1c7c
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product ID'
+		dataType: string
+		lineageTag: 7248090c-4e72-48df-9796-25e0c33e8717
+		summarizeBy: none
+		sourceColumn: Product ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: double
+		lineageTag: 449f8d52-df77-41a5-be37-41a199a0906a
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 3d433398-42c3-4e6a-a5cf-07682fee483e
+		summarizeBy: none
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = User
+
+	column Discount
+		dataType: double
+		lineageTag: 4e05097f-f7a3-4ae4-b14f-140e32beafb9
+		summarizeBy: sum
+		sourceColumn: Discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		dataType: double
+		lineageTag: 4cc75f65-de80-418c-b7c3-3ad34f3a978d
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cost = fact_sales[Sales] - fact_sales[Profit]
+		lineageTag: 1f07306b-2fdb-4e4e-87e8-aab30e4c9ad4
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Sales PLN' =
+			
+			var OrderDate = fact_sales[Order Date]
+			var ApplicableRate =
+			    topn(
+			        1,
+			        filter(
+			            rates,
+			            rates[effectiveDate] <= OrderDate
+			        ),
+			        rates[effectiveDate],
+			        DESC
+			    )
+			var Rate =
+			    maxx(ApplicableRate, rates[mid])
+			return
+			    fact_sales[Sales] * Rate
+		lineageTag: e5ec48a3-d4e5-4df6-9bd9-ea249538bbaf
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Product Group' =
+			
+			VAR ProductSales =
+			    CALCULATE(
+			        SUM(fact_sales[Sales]),
+			        ALLEXCEPT(fact_sales, dim_product[Product Name])
+			    )
+			VAR ProductRank =
+			    RANKX(
+			        ALL(dim_product[Product Name]),
+			        ProductSales,
+			        ,
+			        DESC,
+			        DENSE
+			    )
+			RETURN
+			    IF(
+			        ProductRank <= 5,
+			        min(dim_product[Product Name]),
+			        "Others"
+			    )
+		lineageTag: 1ca38d59-fbdf-488f-a00b-20a892ada763
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_sales = m
+		mode: import
+		source =
+				let
+				    Source = raw_sample_superstore,
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Customer Name", "Segment", "Category", "Sub-Category", "Product Name"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

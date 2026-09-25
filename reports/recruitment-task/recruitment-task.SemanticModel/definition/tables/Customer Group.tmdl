@@ -1,0 +1,25 @@
+table 'Customer Group'
+	lineageTag: 7d470cc3-7826-49c0-84f3-fb2e36fae342
+
+	column 'Product Category'
+		lineageTag: e49e6ad5-a421-463d-9ca1-0dd228393a75
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Product Category]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Customer Group' = calculated
+		mode: import
+		source =
+				
+				UNION(
+				    SELECTCOLUMNS(
+				        dim_product,
+				        "Product Category", dim_product[Category]
+				    ),
+				    ROW("Product Category", "Other")
+				)
+
+	annotation PBI_Id = 6958b29f406a4f64afa76d4e139d669d
+

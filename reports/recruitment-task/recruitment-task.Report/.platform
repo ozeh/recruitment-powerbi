@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "recruitment-task"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "cb76268f-fe4e-423b-be55-58b4b4b9ffbb"
+  }
+}

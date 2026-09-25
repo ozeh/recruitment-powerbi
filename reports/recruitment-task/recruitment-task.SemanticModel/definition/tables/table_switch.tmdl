@@ -1,0 +1,50 @@
+table table_switch
+	lineageTag: 79be21bb-42e2-49a4-875c-52ef4dd3549a
+
+	column table_switch
+		lineageTag: 4ffbd27e-5a40-42f6-b206-d7a6b9ac8818
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'table_switch Order'
+
+		relatedColumnDetails
+			groupByColumn: 'table_switch Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'table_switch Fields'
+		isHidden
+		lineageTag: 0772978d-030e-43a8-8ed4-d6eb0c16afde
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'table_switch Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'table_switch Order'
+		isHidden
+		formatString: 0
+		lineageTag: 653a174d-e415-4deb-92c2-528e625b8103
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition table_switch = calculated
+		mode: import
+		source =
+				{
+				    ("Region", NAMEOF('fact_sales'[Region]), 0),
+				    ("Country", NAMEOF('fact_sales'[Country]), 1),
+				    ("Category", NAMEOF('dim_product'[Category]), 2),
+				    ("Segment", NAMEOF('dim_customer'[Segment]), 3)
+				}
+
+	annotation PBI_Id = 561756669f2d4e65979d8d7b6eb5b06a
+
